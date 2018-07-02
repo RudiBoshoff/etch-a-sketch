@@ -79,7 +79,7 @@ function draw(currentItem){
   if (randomiseColor == false){
     const opacityIncrement = 0.2;
     currentItem.css("background-color", "#333");
-    randomColor.css("background-color", "#333");
+    randomColor.css("color", "white");
     let currentOpacity = Number(currentItem.css("opacity"));
     if (currentOpacity < 1){
         currentOpacity +=  opacityIncrement;
@@ -89,7 +89,7 @@ function draw(currentItem){
     currentItem.css("opacity", 1);
     const backgroundColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
     currentItem.css("background-color", backgroundColor);
-    randomColor.css("background-color", backgroundColor); //very trippy
+    randomColor.css("color", backgroundColor); //very trippy
 }
 }
 
