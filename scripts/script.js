@@ -8,6 +8,8 @@
 // 2.3 change the block sizes based on *2.1*
 // 3. user draws with mouse
 // 3.1 change opacity of blocks on mouseover
+// 4. user initiates color
+//4.1 draw function but instead of a change in opacity; a change in color
 
 
 const myGrid = $(".set-grid");
@@ -17,6 +19,7 @@ const containerHeight = 640;
 // TODO:  $(".container").css("width");
 //        $(".container").css("height");
 //        need to remove px from returned value
+let randomiseColor = false;
 
 // 1. user inputs grid size
 let gridSize = $("input").val();
@@ -60,12 +63,35 @@ function blockSize(){
   });
 }
 
-
+// Randomise Color for drawing
+let toggle = -1;
+randomColor.on("click", function(){
+  if (toggle == -1){
+    randomiseColor = true;
+    toggle = toggle * -1;
+  } else {
+    randomiseColor = false;
+    toggle = -1;
+  }
+})
 // 3.1 change opacity of blocks on mouse over
 function draw(currentItem){
-  const opacityIncrement = 0.2;
-  let currentOpacity = Number(currentItem.css("opacity"));
-  if (currentOpacity < 1){
-      currentOpacity +=  opacityIncrement;
-      currentItem.css("opacity",currentOpacity);
-}}
+  if (randomiseColor == false){
+    const opacityIncrement = 0.2;
+    currentItem.css("background-color", "#333");
+    randomColor.css("background-color", "#333");
+    let currentOpacity = Number(currentItem.css("opacity"));
+    if (currentOpacity < 1){
+        currentOpacity +=  opacityIncrement;
+        currentItem.css("opacity",currentOpacity);
+    }
+} else {
+    currentItem.css("opacity", 1);
+    const backgroundColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+    currentItem.css("background-color", backgroundColor);
+    randomColor.css("background-color", backgroundColor); //very trippy
+}
+}
+
+// 4. user initiates color
+//4.1 draw function but instead of a change in opacity; a change in color
